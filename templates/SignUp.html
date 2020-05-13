@@ -1,0 +1,20 @@
+{% extends "LogIn.html" %}
+
+
+{% block title %}SignUp{% endblock %}
+
+
+{% block head1 %}SIGN UP{% endblock %}
+
+{% block btn %}SIGN UP{% endblock %}
+
+{% block pass %}
+<div class="form-group">
+    <label class="lead font-weight-normal">Repeate Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name=passagain>
+  </div>
+{% endblock %} 
+
+{% block link %} <a href="{{ url_for('Login') }} " class="text-dark links">  Log In Instead  </a> {% endblock %}
+
+{% block form %}action="{{ url_for('SignUp') }}" method="post"{% endblock %}

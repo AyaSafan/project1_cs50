@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Search{% endblock %} 
+{% block body %}
+<div class="container-fluid">
+    
+<div class="row no-gutters" >
+    <div class="col-lg-3 fill" >  
+                <div class="card signin-card vertical">
+                    <center>
+                        
+                        <img src="{{url_for('static', filename='b.jpg')}}" class="img-circle" alt="badge" >    
+                        <br> <br> <h1>{{username}}</h1>                        
+                        <span class = "icon" onclick="myFunction()">&#9776;</span><br><br>
+                        <div id="menu">
+                            <form action="{{ url_for('Searched', username=username) }}" method="post">
+                                <button class="btn_menu" type="submit">SEARCH ALL</button></form>
+                            <form action="{{ url_for('MyBooks', username=username) }}" method="post">
+                                <button class="btn_menu" type="submit">MY BOOKS</button></form>
+                            <form action="{{ url_for('logout') }}" method="post">
+                                <button class="btn_menu" type="submit">LOG OUT</button></form>
+                             
+
+                        </div>
+
+                    </center>
+                </div>
+    </div>
+    <div class="col" >
+          {% block inner%}{%endblock%}
+    </div>
+    </div>
+ {% block newrow%}{%endblock%}
+
+<script>
+function myFunction() {
+  var x = document.getElementById("menu");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{% endblock %}
+

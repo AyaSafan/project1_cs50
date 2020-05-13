@@ -1,0 +1,12 @@
+{% extends "BookPage.html" %}
+
+
+{% block title %}{{ book.title}}{% endblock %}
+
+{% block review_action %} action="{{ url_for('InEdit',username=username, book_isbn=book.isbn) }}" method="post" {% endblock %}
+{% block review_btn%}Edit My Review {% endblock %}
+{% block rating%} {% endblock %}
+{% block newrow%}{% endblock %}
+{% block review %}{% if review != None %}{{review}}{% endif %}{% endblock %}
+{% block txtarea %} name= "edit_review" {% endblock %}
+{% block error %} {{ error }} {% endblock %}

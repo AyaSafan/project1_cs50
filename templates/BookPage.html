@@ -1,0 +1,204 @@
+{% extends "layoutIn.html" %}
+
+
+{% block title %}{{ book.title}}{% endblock %}
+
+
+{% block inner %}
+
+  <div class="card signin-card" style="margin: 9%;"> 
+      <center>
+          <h1>{{ book.title}}</h1><br>
+      
+      {% block rating%}
+          <form action="{{ url_for('BookPage',username=username, book_isbn=book.isbn) }}" method="post">
+              
+              <div class="row no-gutters">
+                
+                <div class="col" style="text-align: left;"><div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary ">
+                <input class="radio" type="radio" name="rating" id="option1" autocomplete="off"  value="1"> 1
+              </label>
+              <label class="btn btn-secondary">
+                <input class="radio" type="radio" name="rating" id="option2" autocomplete="off" value="2"> 2
+              </label>
+              <label class="btn btn-secondary">
+                <input class="radio" type="radio" name="rating" id="option3" autocomplete="off" value="3"> 3
+              </label>
+                <label class="btn btn-secondary">
+                <input class="radio" type="radio" name="rating" id="option3" autocomplete="off" value="4"> 4
+              </label>
+                <label class="btn btn-secondary">
+                <input class="radio" type="radio" name="rating" id="option3" autocomplete="off" value="5"> 5
+              </label>
+            </div></div>
+                  <div class="col-4" style="text-align: left;">
+                          {% for star  in stars %}                        
+                            {%- if loop.index > 5-rating %}<span class="fa fa-star checked"></span>
+                        {% endif %}
+                        {% endfor %}
+                        {% for star  in stars %}                        
+                            {%- if loop.index > rating %}<span class="fa fa-star"></span>{% endif %}
+                        {% endfor %}
+
+                </div>
+                  <div class="col-3" style="text-align: right;">
+                          <button class="btn btn-primary btn-md" type="submit">Post Rating</button>
+
+                </div>
+
+            </div>
+            
+            
+            </form>
+          {% endblock %}
+        <form {% block review_action %} action="{{ url_for('BookPage',username=username, book_isbn=book.isbn) }}" method="post" {% endblock %}>          
+        
+          <textarea class="form-control" rows="5" id="comment" placeholder="... review ..." {% block txtarea %} name= "review" {% endblock %} >{% block review %}{% endblock %}</textarea><br>
+        
+         <div class="row no-gutters"> 
+             
+             <div class="col" style="text-align: Left;"> 
+                 <p class="error" style="text-align: Left;">{% block error %} {{ error }} {% endblock %} </p>
+             </div>
+             <div class="col-3" style="text-align: right;">
+                          <button class="btn btn-primary btn-md" type="submit">{% block review_btn%}Post Review {% endblock %}</button>
+
+            </div>
+         </div>  
+        </form>
+          
+      </center>
+      
+  </div>
+
+{% endblock %}
+
+{% block newrow%}
+<div class="row no-gutters" >
+    <div class="col-lg-3 fill" >  
+                <div class="card signin-card vertical">
+                    <center><h2>Ratings & Reviews</h2><br> </center>
+                    <center>
+
+                      <h4>{{ book.title}}</h4>
+
+                        <p>{{ book.author}}<br>
+                        {{ book.year}}<br>
+                        isbn: {{ book.isbn}}</p>
+                        
+                        {% for star  in stars %}                        
+                            {%- if loop.index > 5-rating %}<span class="fa fa-star checked"></span>
+                        {% endif %}
+                        {% endfor %}
+                        {% for star  in stars %}                        
+                            {%- if loop.index > rating %}<span class="fa fa-star"></span>{% endif %}
+                        {% endfor %}
+                        <blockquote class="blockquote text-center">
+                          
+                          <footer class="blockquote-footer">Your Rating <cite title="Source Title">Pickwick Club</cite></footer>
+                        </blockquote>
+                        {% if my_review.review != None %}
+                        <blockquote class="blockquote text-center">
+                          <p class="mb-0"> "{{my_review.review}}"
+                          <footer class="blockquote-footer">Your Review <cite title="Source Title">Pickwick Club</cite></footer>
+                        </blockquote>
+                        {%endif%}
+                                      
+                     <form action="{{ url_for('Edit',username=username, book_isbn=book.isbn) }}" method="post">       
+                        <div class="input-group-append" >
+                        <button class="btn_menu" type="submit">Edit My Review</button> 
+                        </div>
+
+                    </form>
+                        <button type="button" class="btn_menu" data-toggle="modal" data-target="#exampleModal">Delete My Review</button><br>
+                        <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete My Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are sure you want to delete your review permanently?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+          <form action="{{ url_for('Delete',username=username, book_isbn=book.isbn) }}" method="post">       
+                        <div class="input-group-append" >
+                        <button class="btn btn-primary" type="submit">Delete</button> 
+                        </div>
+            </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+                    <br> 
+                        
+                        <blockquote class="blockquote text-center">
+                          <p class="mb-0"> Average Rating:  {{ avg }} <br>
+                                    Rating Count  {{rate_count}}<br>
+                                    Reviews Count {{review_count}}<br></p>
+                          <footer class="blockquote-footer">Our Reviews <cite title="Source Title">Pickwick Club</cite></footer>
+                        </blockquote>
+                        <form action="{{ url_for('api', book_isbn=book.isbn) }}" method="get">       
+                        <div class="input-group-append" >
+                        <button class="btn_menu" type="submit">Our Reviews json</button> 
+                        </div>
+
+                    </form><br>
+                        <blockquote class="blockquote text-center">
+                          <p class="mb-0"> Average Rating:  {{average_rating}} <br>
+                                    Rating Count  {{work_ratings_count}}<br>
+                                    Reviews Count {{reviews_count}}<br></p>
+                          <footer class="blockquote-footer">Reviews from <cite title="Source Title">GoodReads</cite></footer>
+                        </blockquote>
+                        
+                        
+                    </center>
+                </div>
+    </div>
+    <div class="col" >
+        <div class="card signin-card" style="margin-left: 9%; margin-right: 9%">
+            <div class="row no-gutters">
+                
+                <div class="col" style="text-align: center;"><h2>Community Reviews</h2><br> </div>
+                 
+            </div>
+            {% if reviews != None %}
+            {% for review in reviews %}
+            <div >
+                {% if review.rating == None %}
+                {% for star  in stars %}                        
+                            <span class="fa fa-star"></span>
+                {% endfor %}
+                {% endif %}
+                {% if review.rating != None %}
+                {% for star  in stars %}                        
+                            {%- if loop.index > 5-review.rating %}<span class="fa fa-star checked"></span>
+                        {% endif %}
+                        {% endfor %}
+                        {% for star  in stars %}                        
+                            {%- if loop.index > review.rating %}<span class="fa fa-star"></span>{% endif %}
+                {% endfor %}
+                {% endif %}
+                <blockquote class="blockquote">
+                {% if review.review != None %}<p>{{review.review}}</p>{% endif %}
+                <footer class="blockquote-footer">{{review.username}}</footer>
+                </blockquote>
+            </div>
+            {% endfor %}
+            {% endif %}
+        
+        </div>
+          
+    </div>
+    </div>
+{%endblock%}
+
+
+

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='chat.js') }}"></script>
+
+{% endblock %}
+
+
+
+{% block title %}Home{% endblock %}
+
+
+{% block body %}
+
+  <div class="container card-container"> 
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-md-8">
+            <div class="card intro-card">
+                <center>
+                    <h1>WELCOME TO THE PICKWICK CLUB</h1>
+                    <br>
+                      <p class="lead font-weight-normal">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    </p>
+                    <br>
+                    
+                      <a href="{{ url_for('Login') }}">
+                    <button type="button" class="btn btn-primary btn-lg">LOG IN</button>
+                      </a>  &nbsp; &nbsp;
+                      <a href="{{ url_for('Signup') }}">
+                    <button type="button" class="btn btn-primary btn-lg">SIGN UP</button>
+                      </a>
+
+
+                </center>
+
+            </div>
+            </div>
+            <div class="col"></div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

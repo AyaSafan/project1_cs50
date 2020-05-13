@@ -1,0 +1,70 @@
+{% extends "layoutIn.html" %}
+{% block inner %}
+<div class="card signin-card" style="margin: 9%;"> 
+    <form  action="{{ url_for('MyBooks', username=username) }}" method="post">
+                <div class="row">
+                    <div class="col">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="txtSearch">
+                    </div>
+                    <div class="col-2">
+            <button type="submit" class="btn btn-primary ">Search</button>
+                    </div>
+                </div>
+
+            </form>
+            
+             <br>       
+    <h3>Search Results</h3>
+    <p class="error">{{ message }} </p>
+    <table class="table table-hover">
+              
+              <tbody>
+                  
+                {% for book  in books %}                        
+                            <tr >
+                              
+                              <form action="{{ url_for('BookPage',username=username, book_isbn=book.isbn) }}" method="post">
+                              <th scope="row"> <button class="book_btn" type="submit">{{book.title}}</button></th>
+                              <td>{{book.author}}</td>
+                              <td>{{book.year}}</td>
+                              <td>{{book.isbn}}</td>                 
+                              </form>                    
+                                                           
+                            </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+    <h3>Your Books</h3>
+
+               <table class="table table-hover">
+              <thead >
+                <tr>
+                  <th scope="col">Book Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Year</th>
+                  <th scope="col">isbn</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for book  in mybooks %}                        
+                            <tr >
+                              
+                              <form action="{{ url_for('BookPage',username=username, book_isbn=book.isbn) }}" method="post">
+                              <th scope="row"> <button class="book_btn" type="submit">{{book.title}}</button></th>
+                              <td>{{book.author}}</td>
+                              <td>{{book.year}}</td>
+                              <td>{{book.isbn}}</td>                 
+                              </form>                    
+                                                          
+                            </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+            
+             
+             
+    </div>
+{% endblock %}
+

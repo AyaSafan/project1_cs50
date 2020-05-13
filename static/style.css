@@ -1,0 +1,100 @@
+/***********Containers*****************/
+.container.card-container{
+    margin-top: 12%;
+    margin-bottom: 6%;
+}
+
+.card{
+   background-color: rgb(235, 217, 198, 0.75);  
+ }
+
+.card.intro-card{
+   padding: 40px 20px 20px;
+ }
+
+.card.signin-card{
+   padding: 40px 80px 20px;
+ }
+.card.signin-card.vertical
+{
+  padding: 40px 0px 20px;
+ }
+/****************************************/
+.btn-primary{
+    background-color: #bd8242;
+    border-color: #bd8242;
+}
+
+.btn-primary:hover{
+    background-color: #845b2e;
+    border-color: #845b2e;
+    cursor: pointer;
+}
+a{
+    color:black;
+    font-size: 22px;
+}
+.error{
+    color: #990000;
+    font-weight: bold;
+}
+/***********Username Card***************/
+
+.img-circle {
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.icon{
+    font-size:36px;
+    font-weight: bolder;
+    cursor:pointer;
+    color:#bd8242;
+}
+#menu{
+    display:none;
+    height:100%;
+    flex-grow : 1;
+}
+.btn_menu{
+    background-color: transparent;
+    border-color: transparent;
+    border-bottom-color:#845b2e ;
+    height: 50px;
+}
+.btn_menu:hover{cursor: pointer}
+.btn_menu:active{border: none; border-bottom:solid;}
+.btn_menu:focus { outline: none; }
+/***********Book List***************/
+.table{
+   background-color: rgb(235, 217, 198, 0.80);  
+ }
+.book{
+    font-size: 18px;
+}
+.book:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+.book_btn{
+    background-color: transparent;
+    border-color: transparent;
+    height: 100%;
+}
+.book_btn:hover{cursor: pointer; border: none;}
+.book_btn:active{border: none;}
+.book_btn:focus { outline: none; }
+/*************rating********************/
+.btn-secondary{
+      background-color: #bd8242;  
+}
+
+.checked {
+  color: orange;
+}
+
+/*************modal************/
+.btn.btn-secondary{
+    background-color: rgb(235, 217, 198, 1);  
+}
